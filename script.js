@@ -1,43 +1,25 @@
-'use strict';
+$(document).ready(function () {
+    $("#buscar-cep").click(function () {
+        const cep = $("#cep").val();
 
-const limparFormulario = (endereco) =>{
-    document.getElementById('endereco').value = '';
-    document.getElementById('bairro').value = '';
-    document.getElementById('cidade').value = '';
-    document.getElementById('estado').value = '';
-}
+        // Fazer solicitação AJAX para o ViaCEP
+        $.ajax({
+            url: `https://viacep.com.br/ws/${cep}/json/`,
+            dataType: "json",
+            success: function (data) {
+                if (!data.erro) {
+                    $("#logradouro").val(data.logradouro);
+                    $("#bairro").val(data.bairro);
+                    $("#cidade").val(data.localidade);
+                    $("#estado").val(data.uf);
+                } else {
+                    alert("CEP não encontrado.");
+                }
+            },
+            error: function () {
+                alert("Ocorreu um erro ao buscar o CEP.");
+            }
+        });
+    });
+});
 
-
-const preencherFormulario = (endereco) =>{
-    document.getElementById('endereco').value = endereco.logradouro;
-    document.getElementById('bairro').value = endereco.bairro;
-    document.getElementById('cidade').value = endereco.localidade;
-    document.getElementById('estado').value = endereco.uf;
-}
-
-
-const eNumero = (numero) => /^[0-9]+$/.test(numero);
-
-const cepValido = (cep) => cep.length == 8 && eNumero(cep); 
-
-const pesquisarCep = async() => {
-    limparFormulario();
-    
-    const cep = document.getElementById('cep').value;
-    const url = `https://viacep.com.br/ws/${cep}/json/`;
-    if (cepValido(cep)){
-        const dados = await fetch(url);
-        const endereco = await dados.json();
-        if (endereco.hasOwnProperty('erro')){
-            document.getElementById('endereco').value = 'CEP não encontrado!';
-        }else {
-            preencherFormulario(endereco);
-        }
-    }else{
-        document.getElementById('endereco').value = 'CEP incorreto!';
-    }
-     
-}
-
-document.getElementById('cep')
-        .addEventListener('focusout',pesquisarCep);
