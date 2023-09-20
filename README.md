@@ -1,2 +1,2 @@
 # Forms
-https://github.com/nicolliegoes/Forms.git
+https://github.com/nicolliegoes/Forms
