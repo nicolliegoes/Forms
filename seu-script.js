@@ -34,4 +34,6 @@ $(document).ready(function () {
         sessionStorage.setItem("cadastroData", JSON.stringify(cadastroData));
 
     });
+
+    
 });
