@@ -7,19 +7,28 @@
     <title>Login</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Parabéns!</h2>
+        <h2 class="h2">Parabéns!</h2>
         <h3>Você conseguiu fazer seu cadastro com sucesso.</h3>
+        <p>Clique no botão para ver sua localização ou volte para a pagina inicial</p>
         <div class="container">
             <form id="cadastro-form">
-        <a href="index.html"><button class="btn" type="button" value="submit">Voltar</button></a>
-        </form>
-      
+                <div id="mapa" style="height: 400px;"></div>
+                <br>
+                <button id="localizacao-button" class="btn">Mostrar Localização</button>
+                <a href="index.html"><button class="btn" type="button" value="submit">Voltar</button></a>
+
+            </form>
     </div>
+    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="seu-script.js"></script>
+    <script src="api.js"></script>
 </body>
 </html>
